@@ -18,9 +18,7 @@ export const AuthContext = createContext<AuthContentProps>({
   signingUp: false,
   user: {},
   login: async ({ email, password, redirectUrl }) => {},
-  register: async ({ name, email, password, redirectUrl }) => {
-    return { error: false, message: "", hasAttempted: false };
-  },
+  register: async ({ name, email, password, redirectUrl }) => {},
   logout: async () => {},
 });
 
@@ -32,7 +30,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [signingUp, setSigningUp] = useState(false);
   const [authenticating, setAuthenticating] = useState(false);
 
-  const login = async ({ email, password, redirectUrl = "/" }) => {
+  const login = async ({
+    email,
+    password,
+    redirectUrl = "/",
+  }: {
+    email: string;
+    password: string;
+    redirectUrl?: string;
+  }) => {
     clearAllStorage(cookieNames.token);
     setAuthenticating(true);
     axiosClient
@@ -64,6 +70,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     email,
     password,
     redirectUrl = "/login",
+  }: {
+    name: string;
+    email: string;
+    password: string;
+    redirectUrl?: string;
   }) => {
     setSigningUp(true);
     const response = await axiosClient.post("/auth/register", {
@@ -71,21 +82,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       email,
       password,
     });
-    if (response.status <= 300) {
-      const loginData = { email, password };
-      await login(loginData);
+    if (response.status <= 301) {
+      toast.success(response.data.message);
       setSigningUp(false);
-
-      return {
-        error: false,
-        message: "Sign up successful",
-        hasAttempted: true,
-      };
+      setTimeout(() => router.push(redirectUrl), 500);
     } else {
       setAuthenticating(false);
       setSigningUp(false);
-
-      return { error: true, message: "Failed to Signup", hasAttempted: true };
     }
   };
 

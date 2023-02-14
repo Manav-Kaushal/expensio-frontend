@@ -31,6 +31,14 @@ type GlobalStateProps = {
   deleteTransaction?: (id: string) => Promise<void>;
   addTransaction?: (transaction: any) => Promise<void>;
   getTransactions?: () => {};
+  registerUser?: (
+    values: {
+      name: string;
+      email: string;
+      password: string;
+    },
+    setSubmitting: (arg0: boolean) => void
+  ) => Promise<void>;
 };
 
 // Auth Context
@@ -39,11 +47,15 @@ type AuthContentProps = {
   isAuthenticating: boolean;
   signingUp: boolean;
   user: Partial<UserProps>;
-  login: (
-    email: string,
-    password: string,
-    redirectUrl?: string
-  ) => Promise<void>;
+  login: ({
+    email,
+    password,
+    redirectUrl,
+  }: {
+    email: string;
+    password: string;
+    redirectUrl?: string;
+  }) => Promise<void>;
   register: ({
     name,
     email,
@@ -54,11 +66,7 @@ type AuthContentProps = {
     email: string;
     password: string;
     redirectUrl?: string;
-  }) => {
-    error: false;
-    message: "";
-    hasAttempted: false;
-  };
+  }) => Promise<void>;
   logout: () => {};
 };
 

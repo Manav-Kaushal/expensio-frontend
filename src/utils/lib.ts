@@ -46,7 +46,7 @@ function updateCookieValue<T>(
   updater: (value: T) => T,
   options?: Cookies.CookieAttributes
 ) {
-  const currentValue = getCookieValue<T>(key, undefined);
+  const currentValue = getCookieValue<T>(key, undefined as T);
   const updatedValue = updater(currentValue);
   setCookieValue(key, updatedValue, options);
 }

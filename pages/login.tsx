@@ -22,7 +22,7 @@ const Login = () => {
             password: "",
           }}
           onSubmit={async (values) => {
-            login(values.email, values.password);
+            login({ email: values.email, password: values.password });
           }}
         >
           {({ values }) => (

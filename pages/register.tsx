@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import { Field, Form, Formik } from "formik";
-import Logo from "@components/Logo";
-import { GlobalContext } from "@context/GlobalState";
-import InputField from "@components/InputField";
-import Card from "@components/Card";
-import Button from "@components/Button";
+import { GlobalContext } from "@utils/context/GlobalState";
+import Card from "@components/shared/Card";
+import Logo from "@components/shared/Logo";
+import InputField from "@components/shared/InputField";
+import Button from "@components/shared/Button";
 
 const Register = () => {
   const { registerUser } = useContext(GlobalContext);
@@ -23,7 +23,7 @@ const Register = () => {
             password: "",
           }}
           onSubmit={(values, { setSubmitting }) => {
-            registerUser(values, setSubmitting);
+            registerUser!(values, setSubmitting);
           }}
         >
           {({ values, isSubmitting }) => (
