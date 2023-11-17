@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { XCircleIcon } from "@heroicons/react/24/solid";
 import dayjs from "dayjs";
 import LocalizedFormat from "dayjs/plugin/localizedFormat";
-import { GlobalContext } from "@utils/context/GlobalState";
+import { GlobalContext } from "@context/GlobalState";
 import { numberWithCommas } from "@utils/lib";
 import { TransactionProps } from "typings";
 

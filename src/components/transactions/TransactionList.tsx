@@ -1,4 +1,4 @@
-import { GlobalContext } from "@utils/context/GlobalState";
+import { GlobalContext } from "@context/GlobalState";
 import { useContext, useEffect } from "react";
 import { SingleTransaction } from "./Transaction";
 

@@ -1,7 +1,6 @@
 import Cookies from "js-cookie";
-import { NextRouter, Router } from "next/router";
+import { NextRouter } from "next/router";
 import { ParsedUrlQueryInput } from "querystring";
-import { CookieKey } from "typings";
 
 export const setLocalStorage = (key: string, value: any) => {
   try {
@@ -28,30 +27,24 @@ export const updateLocalStorage = (key: string, value: any) => {
   }
 };
 
-function getCookieValue<T>(key: CookieKey, defaultValue: T): T {
-  const cookieValue = Cookies.get(key);
-  return cookieValue ? (JSON.parse(cookieValue) as T) : defaultValue;
+export function getCookie(key: string): string | undefined {
+  return Cookies.get(key);
 }
 
-function setCookieValue<T>(
-  key: CookieKey,
-  value: T,
+export function setCookie(
+  key: string,
+  value: string,
   options?: Cookies.CookieAttributes
-) {
-  Cookies.set(key, JSON.stringify(value), options);
+): void {
+  Cookies.set(key, value, options);
 }
 
-function updateCookieValue<T>(
-  key: CookieKey,
-  updater: (value: T) => T,
+export function removeCookie(
+  key: string,
   options?: Cookies.CookieAttributes
-) {
-  const currentValue = getCookieValue<T>(key, undefined as T);
-  const updatedValue = updater(currentValue);
-  setCookieValue(key, updatedValue, options);
+): void {
+  Cookies.remove(key, options);
 }
-
-export { getCookieValue, setCookieValue, updateCookieValue };
 
 export const redirectToLocation = ({
   router,

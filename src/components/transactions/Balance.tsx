@@ -1,4 +1,4 @@
-import { GlobalContext } from "@utils/context/GlobalState";
+import { GlobalContext } from "@context/GlobalState";
 import { numberWithCommas } from "@utils/lib";
 import { useContext } from "react";
 

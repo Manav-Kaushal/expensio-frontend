@@ -19,7 +19,6 @@ export const GlobalContext = createContext<GlobalStateProps>(initialState);
 
 // Provider component
 export const GlobalProvider = ({ children }: { children: ReactNode }) => {
-  const router = useRouter();
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   // Actions

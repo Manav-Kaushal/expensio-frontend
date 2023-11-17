@@ -43,9 +43,6 @@ type GlobalStateProps = {
 
 // Auth Context
 type AuthContentProps = {
-  isAuthenticated: boolean;
-  isAuthenticating: boolean;
-  signingUp: boolean;
   user: Partial<UserProps>;
   login: ({
     email,
@@ -60,17 +57,19 @@ type AuthContentProps = {
     name,
     email,
     password,
+    setSubmitting,
     redirectUrl,
   }: {
     name: string;
     email: string;
     password: string;
+    setSubmitting: (isSubmitting: boolean) => void;
     redirectUrl?: string;
   }) => Promise<void>;
   logout: () => {};
 };
 
-//! Components
+//? Components
 
 // Button
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {

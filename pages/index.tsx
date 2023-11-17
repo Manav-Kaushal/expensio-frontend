@@ -1,4 +1,4 @@
-import useAuth from "@utils/context/AuthContext";
+import useAuth from "@context/AuthContext";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { motion } from "framer-motion";

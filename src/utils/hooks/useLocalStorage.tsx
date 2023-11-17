@@ -8,8 +8,12 @@ function useLocalStorage<T>(
 ): [T, (value: T) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
-      const item = localStorage.getItem(key);
-      return item ? (JSON.parse(item) as T) : initialValue;
+      if (typeof window !== "undefined") {
+        const item = localStorage.getItem(key);
+        return item ? (JSON.parse(item) as T) : initialValue;
+      } else {
+        return initialValue;
+      }
     } catch (error) {
       console.log(error);
       return initialValue;
@@ -18,8 +22,10 @@ function useLocalStorage<T>(
 
   const setValue = (value: T) => {
     try {
-      setStoredValue(value);
-      localStorage.setItem(key, JSON.stringify(value));
+      if (typeof window !== "undefined") {
+        setStoredValue(value);
+        localStorage.setItem(key, JSON.stringify(value));
+      }
     } catch (error) {
       console.log(error);
     }

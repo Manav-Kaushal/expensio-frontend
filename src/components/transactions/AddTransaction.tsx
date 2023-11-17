@@ -1,4 +1,4 @@
-import { GlobalContext } from "@utils/context/GlobalState";
+import { GlobalContext } from "@context/GlobalState";
 import { Formik, Field, Form } from "formik";
 import { useContext, useState } from "react";
 

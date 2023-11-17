@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import { Field, Form, Formik } from "formik";
-import { GlobalContext } from "@utils/context/GlobalState";
 import Card from "@components/shared/Card";
 import Logo from "@components/shared/Logo";
 import InputField from "@components/shared/InputField";
 import Button from "@components/shared/Button";
+import useAuth from "@context/AuthContext";
 
 const Register = () => {
-  const { registerUser } = useContext(GlobalContext);
+  const { register } = useAuth();
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
@@ -23,7 +23,12 @@ const Register = () => {
             password: "",
           }}
           onSubmit={(values, { setSubmitting }) => {
-            registerUser!(values, setSubmitting);
+            register!({
+              name: values.name,
+              email: values.email,
+              password: values.password,
+              setSubmitting,
+            });
           }}
         >
           {({ values, isSubmitting }) => (

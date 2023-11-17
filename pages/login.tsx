@@ -1,14 +1,14 @@
 import React from "react";
 import Link from "next/link";
 import { Field, Form, Formik } from "formik";
-import useAuth from "@utils/context/AuthContext";
+import useAuth from "@context/AuthContext";
 import Card from "@components/shared/Card";
 import Logo from "@components/shared/Logo";
 import InputField from "@components/shared/InputField";
 import Button from "@components/shared/Button";
 
 const Login = () => {
-  const { login, isAuthenticating } = useAuth();
+  const { login } = useAuth();
 
   return (
     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
@@ -37,9 +37,7 @@ const Login = () => {
               <div className="text-center">
                 <Button
                   type="submit"
-                  disabled={
-                    isAuthenticating || !values.email || !values.password
-                  }
+                  disabled={!values.email || !values.password}
                 >
                   Login
                 </Button>

@@ -1,8 +1,8 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { useEffect } from "react";
-import { AuthProvider } from "@utils/context/AuthContext";
-import { GlobalProvider } from "@utils/context/GlobalState";
+import { AuthProvider } from "@context/AuthContext";
+import { GlobalProvider } from "@context/GlobalState";
 import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }: AppProps) {
