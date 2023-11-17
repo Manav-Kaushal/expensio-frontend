@@ -19,7 +19,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`py-2 px-4 rounded-full text-white focus:outline-none focus:shadow-outline mx-auto w-fit disabled:bg-gray-500 disabled:cursor-not-allowed ${getVariant(
+      className={`h-[36px] px-4 flex items-center justify-center rounded text-white min-w-[80px] focus:outline-none focus:shadow-outline mx-auto w-fit disabled:bg-gray-500 disabled:cursor-not-allowed duration-200 ${getVariant(
         variant
       )} ${size === "sm" ? "text-sm" : "text-base"}`}
       {...props}

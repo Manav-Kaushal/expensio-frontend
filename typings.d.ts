@@ -44,34 +44,10 @@ type GlobalStateProps = {
 // Auth Context
 type AuthContentProps = {
   user: Partial<UserProps>;
-  login: ({
-    email,
-    password,
-    redirectUrl,
-  }: {
-    email: string;
-    password: string;
-    redirectUrl?: string;
-  }) => Promise<void>;
-  register: ({
-    name,
-    email,
-    password,
-    setSubmitting,
-    redirectUrl,
-  }: {
-    name: string;
-    email: string;
-    password: string;
-    setSubmitting: (isSubmitting: boolean) => void;
-    redirectUrl?: string;
-  }) => Promise<void>;
+  setUser: (value: Partial<UserProps>) => void;
   logout: () => {};
 };
 
-//? Components
-
-// Button
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   children: ReactNode;
   type?: "submit" | "button";

@@ -1,6 +1,12 @@
 import Cookies from "js-cookie";
 import { NextRouter } from "next/router";
 import { ParsedUrlQueryInput } from "querystring";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export const cn = (...args: ClassValue[]) => {
+  return twMerge(clsx(args));
+};
 
 export const setLocalStorage = (key: string, value: any) => {
   try {
