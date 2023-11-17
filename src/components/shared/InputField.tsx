@@ -28,17 +28,20 @@ const InputField = ({
           {...props}
         />
         {type === "password" && (
-          <div className="absolute inset-y-0 right-0 flex items-center pl-3 pr-3 bg-gray-200 rounded cursor-pointer">
+          <div
+            className="absolute inset-y-0 right-0 flex items-center pl-3 pr-3 bg-gray-200 rounded cursor-pointer"
+            onClick={() => {
+              if (isPasswordVisible) {
+                setIsPasswordVisible(false);
+              } else {
+                setIsPasswordVisible(true);
+              }
+            }}
+          >
             {isPasswordVisible ? (
-              <EyeSlashIcon
-                className="w-5 h-5 text-black"
-                onClick={() => setIsPasswordVisible(false)}
-              />
+              <EyeSlashIcon className="w-5 h-5 text-black" />
             ) : (
-              <EyeIcon
-                className="w-5 h-5 text-black"
-                onClick={() => setIsPasswordVisible(true)}
-              />
+              <EyeIcon className="w-5 h-5 text-black" />
             )}
           </div>
         )}

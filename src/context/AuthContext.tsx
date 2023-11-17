@@ -19,32 +19,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const [user, setUser] = useLocalStorage<Partial<UserProps>>("session", {});
 
-  // const register = async ({
-  //   name,
-  //   email,
-  //   password,
-  //   setSubmitting,
-  //   redirectUrl = "/login",
-  // }: {
-  //   name: string;
-  //   email: string;
-  //   password: string;
-  //   setSubmitting: (isSubmitting: boolean) => void;
-  //   redirectUrl?: string;
-  // }) => {
-  //   try {
-  //     const response = await axiosClient.post("/auth/register", {
-  //       name,
-  //       email,
-  //       password,
-  //     });
-  //     toast.success(response.data.message);
-  //     setTimeout(() => router.push(redirectUrl), 500);
-  //   } catch (error) {
-  //     toast.error("Registration failed. Please try again.");
-  //   }
-  // };
-
   async function logout() {
     clearAllStorage(cookieNames.token);
     setUser({});

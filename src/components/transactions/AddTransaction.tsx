@@ -1,19 +1,33 @@
+import Button from "@components/shared/Button";
 import { GlobalContext } from "@context/GlobalState";
-import { Formik, Field, Form } from "formik";
+import { Formik, Field, Form, FormikState } from "formik";
 import { useContext, useState } from "react";
 
 export const AddTransaction = () => {
   const { addTransaction } = useContext(GlobalContext);
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (transaction: { text: string; amount: string }) => {
-    setLoading(true);
+  const handleSubmit = (
+    transaction: { text: string; amount: string },
+    setSubmitting: (isSubmitting: boolean) => void,
+    resetForm: (
+      nextState?:
+        | Partial<
+            FormikState<{
+              text: string;
+              amount: string;
+            }>
+          >
+        | undefined
+    ) => void
+  ) => {
+    setSubmitting(true);
     const newTransaction = {
       text: transaction.text,
       amount: +transaction.amount,
     };
     addTransaction!(newTransaction);
-    setLoading(false);
+    resetForm();
+    setSubmitting(false);
   };
 
   return (
@@ -27,9 +41,8 @@ export const AddTransaction = () => {
             text: "",
             amount: "",
           }}
-          onSubmit={(values, { resetForm }) => {
-            handleSubmit(values);
-            resetForm();
+          onSubmit={(values, { setSubmitting, resetForm }) => {
+            handleSubmit(values, setSubmitting, resetForm);
           }}
         >
           {({ isSubmitting }) => (
@@ -47,8 +60,8 @@ export const AddTransaction = () => {
                 <Field
                   id="text"
                   name="text"
-                  placeholder="Text"
-                  className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="Transaction message"
+                  className="block w-full p-2 mt-1 duration-200 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm focus:outline-none focus:ring-1"
                 />
               </div>
               <div>
@@ -64,17 +77,19 @@ export const AddTransaction = () => {
                   id="amount"
                   name="amount"
                   placeholder="Amount (- expense, + income)"
-                  className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full p-2 mt-1 duration-200 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm focus:outline-none focus:ring-1"
                 />
               </div>
               <div>
-                <button
+                <Button
+                  size="sm"
+                  variant="black"
                   type="submit"
-                  className="flex items-center justify-center px-3 py-2 ml-auto text-sm font-medium leading-4 text-white transition-all duration-200 ease-in-out rounded-md shadow-sm max-w-fit bg-black/80 hover:bg-black focus:outline-none disabled:bg-gray-500"
+                  position="right"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Adding..." : "Add Transaction"}
-                </button>
+                </Button>
               </div>
             </Form>
           )}

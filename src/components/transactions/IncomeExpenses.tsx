@@ -20,7 +20,7 @@ export const IncomeExpenses = () => {
   return (
     <div className="flex justify-between px-12 py-4 text-lg border rounded-md shadow-md">
       <div>
-        <h4>Income</h4>
+        <h4>Savings</h4>
         <p className="font-semibold text-green-500">
           ₹{numberWithCommas(income)}
         </p>

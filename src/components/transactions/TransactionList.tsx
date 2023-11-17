@@ -14,13 +14,11 @@ export const TransactionList = () => {
       <h4 className="mr-6 text-lg font-semibold border-b border-gray-400">
         History
       </h4>
-      <ul className="space-y-2 overflow-y-scroll max-h-[380px] pr-6">
+      <ul className="space-y-2 overflow-y-scroll max-h-[380px] p-2">
         {!!transactions?.length ? (
-          <>
-            {transactions.map((transaction) => (
-              <SingleTransaction key={transaction._id} data={transaction} />
-            ))}
-          </>
+          transactions.map((transaction) => (
+            <SingleTransaction key={transaction._id} data={transaction} />
+          ))
         ) : (
           <p className="text-gray-400">
             No transactions logged! Please add a transaction.

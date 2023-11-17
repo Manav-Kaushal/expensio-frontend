@@ -51,9 +51,17 @@ export const GlobalProvider = ({ children }: { children: ReactNode }) => {
 
   async function addTransaction(transaction: any) {
     try {
-      const res = await axiosClient.post(`/v1/transactions`, {
-        ...transaction,
-      });
+      const res = await axiosClient.post(
+        `/v1/transactions`,
+        JSON.stringify({
+          ...transaction,
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       dispatch({ type: "ADD_TRANSACTION", payload: res.data.data });
     } catch (err: any) {
       toast.error(err.response.data.error[0]);

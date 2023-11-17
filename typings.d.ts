@@ -51,8 +51,9 @@ type AuthContentProps = {
 interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   children: ReactNode;
   type?: "submit" | "button";
-  variant?: "primary";
+  variant?: "primary" | "black";
   size?: "sm" | "md" | "lg";
+  position?: "left" | "center" | "right";
 }
 
 // Input Field
